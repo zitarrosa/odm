@@ -1,0 +1,14 @@
+<phpunit bootstrap="phpunit_bootstrap.php"
+     colors="true"
+     convertErrorsToExceptions="true"
+     convertNoticesToExceptions="true"
+     convertWarningsToExceptions="true"
+     stopOnFailure="false"
+     backupGlobals="false">
+
+  <testsuites>
+    <testsuite name="odm">
+      <directory>odm/tests</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

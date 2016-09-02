@@ -10,5 +10,16 @@
     ],
     "require": {
         "doctrine/common": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zitarrosa\\ODM\\": "odm/src",
+            "Zitarrosa\\ODM\\Tests\\": "odm/tests",
+            "Zitarrosa\\Common\\": "common/src",
+            "Zitarrosa\\Common\\Tests\\": "common/tests"
+        }
+    },
+    "require-dev": {
+        "mockery/mockery": "^0.9.5"
     }
 }

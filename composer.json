@@ -1,0 +1,14 @@
+{
+    "name": "zitarrosa/odm",
+    "description": "Doctrine based PHP ODM for ElasticSearch",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Carlos Frutos",
+            "email": "carlos@kiwing.it"
+        }
+    ],
+    "require": {
+        "doctrine/common": "^2.6"
+    }
+}

@@ -9,67 +9,136 @@ namespace Zitarrosa\ODM;
 final class EntityManager implements EntityManagerInterface
 {
     /**
-     * {@inheritdoc}
+     * The metadata factory, used to retrieve the ODM metadata of entity classes.
+     *
+     * @var \Zitarrosa\ODM\Mapping\ClassMetadataFactory
      */
-    public function find($className, $id);
+    private $metadataFactory;
+
+    /**
+     * The UnitOfWork used to coordinate object-level transactions.
+     *
+     * @var UnitOfWork
+     */
+    private $unitOfWork;
+
+    /**
+     * @todo
+     */
+    protected function __construct()
+    {
+        $this->unitOfWork = new UnitOfWork($this);
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function persist($object);
+    public function find($className, $id)
+    {
+        
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function remove($object);
+    public function persist($object)
+    {
+
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function merge($object);
+    public function remove($object)
+    {
+
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function clear($objectName = null);
+    public function merge($object)
+    {
+
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function detach($object);
+    public function clear($objectName = null)
+    {
+
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function refresh($object);
+    public function detach($object)
+    {
+
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function flush();
+    public function refresh($object)
+    {
+
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function getRepository($className);
+    public function flush()
+    {
+
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function getClassMetadata($className);
+    public function getRepository($className)
+    {
+
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function getMetadataFactory();
+    public function getClassMetadata($className)
+    {
+        return $this->metadataFactory->getMetadataFor($className);
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function initializeObject($obj);
+    public function getMetadataFactory()
+    {
+
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function contains($object);
+    public function initializeObject($obj)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function contains($object)
+    {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUnitOfWork()
+    {
+        return $this->unitOfWork;
+    }
 }

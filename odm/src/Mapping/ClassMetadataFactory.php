@@ -30,6 +30,8 @@ class ClassMetadataFactory extends AbstractClassMetadataFactory
     }
 
     /**
+     * Set entity manager
+     * 
      * @var EntityManagerInterface $em Entity manager
      */
     public function setEntityManager(EntityManagerInterface $em)

@@ -1,5 +1,5 @@
 <?php
-namespace Zitarrosa\ODM\Tests;
+namespace Zitarrosa\ODM\Tests\Mapping;
 
 use Zitarrosa\ODM\EntityManagerInterface;
 use Zitarrosa\ODM\Mapping\ClassMetadataFactory;

@@ -9,6 +9,11 @@ namespace Zitarrosa\ODM;
 final class EntityManager implements EntityManagerInterface
 {
     /**
+     * @var Configuration
+     */
+    private $config;
+
+    /**
      * The metadata factory, used to retrieve the ODM metadata of entity classes.
      *
      * @var \Zitarrosa\ODM\Mapping\ClassMetadataFactory
@@ -32,9 +37,16 @@ final class EntityManager implements EntityManagerInterface
     /**
      * @todo
      */
-    protected function __construct()
+    protected function __construct(Configuration $config)
     {
+        $this->config = $config;
         $this->unitOfWork = new UnitOfWork($this);
+
+        $metadataFactoryClassName = $config->getClassMetadataFactoryName();
+        $this->metadataFactory = new $metadataFactoryClassName();
+        $this->metadataFactory->setEntityManager($this);
+
+        $this->repositoryFactory = $config->getRepositoryFactory();
     }
 
     /**

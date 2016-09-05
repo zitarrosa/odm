@@ -16,6 +16,13 @@ final class EntityManager implements EntityManagerInterface
     private $metadataFactory;
 
     /**
+     * The repository factory used to create dynamic repositories.
+     *
+     * @var \Zitarrosa\ODM\Repository\RepositoryFactoryInterface
+     */
+    private $repositoryFactory;
+
+    /**
      * The UnitOfWork used to coordinate object-level transactions.
      *
      * @var UnitOfWork
@@ -99,7 +106,7 @@ final class EntityManager implements EntityManagerInterface
      */
     public function getRepository($className)
     {
-
+        return $this->repositoryFactory->getRepository($this, $className);
     }
 
     /**

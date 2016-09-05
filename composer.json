@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "doctrine/common": "^2.6"
+        "doctrine/common": "^2.6",
+        "elasticsearch/elasticsearch": "~2.0"
     },
     "autoload": {
         "psr-4": {
@@ -18,7 +19,7 @@
             "Zitarrosa\\Common\\": "common/src",
             "Zitarrosa\\Common\\Tests\\": "common/tests",
             "Zitarrosa\\ESAL\\": "esal/src",
-            "Zitarrosa\\ESAL\\Tests": "esal/tests"
+            "Zitarrosa\\ESAL\\Tests\\": "esal/tests"
         }
     },
     "require-dev": {

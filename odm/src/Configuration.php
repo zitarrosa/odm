@@ -1,6 +1,7 @@
 <?php
 namespace Zitarrosa\ODM;
 
+use Doctrine\Common\Persistence\Mapping\Driver\MappingDriver;
 use Zitarrosa\ODM\Repository\RepositoryFactoryInterface;
 use Zitarrosa\ODM\Repository\DefaultRepositoryFactory;
 use Zitarrosa\ODM\Mapping\ClassMetadataFactory;
@@ -55,5 +56,32 @@ class Configuration
         }
 
         return $this->attributes['classMetadataFactoryName'];
+    }
+
+    /**
+     * Sets the cache driver implementation that is used for metadata caching.
+     *
+     * @param MappingDriver $driverImpl
+     *
+     * @return void
+     *
+     * @todo Force parameter to be a Closure to ensure lazy evaluation
+     *       (as soon as a metadata cache is in effect, the driver never needs to initialize).
+     */
+    public function setMetadataDriverImpl(MappingDriver $driverImpl)
+    {
+        $this->attributes['metadataDriverImpl'] = $driverImpl;
+    }
+
+    /**
+     * Gets the cache driver implementation that is used for the mapping metadata.
+     *
+     * @return MappingDriver|null
+     */
+    public function getMetadataDriverImpl()
+    {
+        return isset($this->attributes['metadataDriverImpl'])
+            ? $this->attributes['metadataDriverImpl']
+            : null;
     }
 }

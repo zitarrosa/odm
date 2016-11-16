@@ -19,7 +19,8 @@
             "Zitarrosa\\Common\\": "common/src",
             "Zitarrosa\\Common\\Tests\\": "common/tests",
             "Zitarrosa\\ESAL\\": "esal/src",
-            "Zitarrosa\\ESAL\\Tests\\": "esal/tests"
+            "Zitarrosa\\ESAL\\Tests\\": "esal/tests",
+            "Zitarrosa\\Example\\" : "example"
         }
     },
     "require-dev": {

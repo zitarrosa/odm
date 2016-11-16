@@ -19,6 +19,78 @@ class ClassMetadata implements ClassMetadataInterface
     public $name;
 
     /**
+     * READ-ONLY: The name of the entity class that is at the root of the mapped entity inheritance
+     * hierarchy. If the entity is not part of a mapped inheritance hierarchy this is the same
+     * as {@link $name}.
+     *
+     * @var string
+     */
+    public $rootEntityName;
+
+    /**
+     * READ-ONLY
+     *
+     * Keys are field names
+     *
+     * - <b>fieldName</b> (string)
+     * The name of the field in the entity.
+     *
+     * - <b>type</b> (string)
+     * The type name of the mapped field.
+     *
+     * - <b>mappedName</b> (string)
+     * Optional. Mapped field name. Defaults to the field name.
+     *
+     *
+     * @var array
+     */
+    public $fieldMappings = [];
+
+    /**
+     * READ-ONLY: An array of field names. Used to look up field names from column names.
+     * Keys are mapped field names and values are field names.
+     * This is the reverse lookup map of $mappedFieldNames.
+     *
+     * @var array
+     */
+    public $fieldNames = [];
+
+    /**
+     * READ-ONLY: A map of field names to column names. Keys are field names and values mapped field names.
+     * Used to look up mapped field names from field names.
+     * This is the reverse lookup map of $fieldNames.
+     *
+     * @var array
+     *
+     * @todo We could get rid of this array by just using $fieldMappings[$fieldName]['columnName'].
+     */
+    public $mappedFieldNames = [];
+
+    /**
+     * @todo
+     * @var ReflectionClass
+     */
+    public $reflClass;
+
+    /**
+     * READ-ONLY: Document name
+     *
+     * @param string
+     */
+    public $document;
+
+    /**
+     * Initializes a new ClassMetadata instance
+     *
+     * @param string $entityName Entity name
+     */
+    public function __construct($entityName)
+    {
+        $this->name = (string) $entityName;
+        $this->rootEntityName = $this->entityName;
+    }
+
+    /**
      * Restores some state that can not be serialized/unserialized.
      *
      * @param ReflectionService $reflService
@@ -27,7 +99,9 @@ class ClassMetadata implements ClassMetadataInterface
      */
     public function wakeupReflection(ReflectionService $reflService)
     {
+        $this->reflClass = $reflService->getClass($this->name);
 
+        /** @todo */
     }
 
     /**
@@ -75,15 +149,11 @@ class ClassMetadata implements ClassMetadataInterface
     }
 
     /**
-     * Checks if the given field is a mapped property for this class.
-     *
-     * @param string $fieldName
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function hasField($fieldName)
     {
-
+        return isset($this->fieldMappings[$fieldName]);
     }
 
     /**
@@ -219,5 +289,49 @@ class ClassMetadata implements ClassMetadataInterface
     public function getIdentifierValues($object)
     {
 
+    }
+
+    /**
+     * Set document name
+     *
+     * @param string $document Document name
+     *
+     * @return void
+     */
+    public function setDocument($document)
+    {
+        $this->document = (string) $document;
+    }
+
+    /**
+     * Adds a mapped field to the class.
+     *
+     * @param array $mapping The field mapping.
+     *
+     * @return void
+     */
+    public function mapField(array $mapping)
+    {
+        $this->validateAndCompleteFieldMapping($mapping);
+
+        $this->fieldMappings[$mapping['fieldName']] = $mapping;
+    }
+
+    /**
+     * @return void
+     */
+    protected function validateAndCompleteFieldMapping(array &$mapping)
+    {
+        if (!empty($mapping['id'])) {
+            $this->identifier = $mapping['fieldName'];
+        }
+
+        if (empty($mapping['mappedFieldName'])) {
+            $mapping['mappedFieldName'] = $mapping['fieldName'];
+        }
+
+        $this->mappedFieldNames[$mapping['fieldName']] = $mapping['mappedFieldName'];
+
+        $this->fieldNames[$mapping['mappedFieldName']] = $mapping['fieldName'];
     }
 }

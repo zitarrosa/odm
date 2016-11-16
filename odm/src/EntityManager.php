@@ -1,8 +1,6 @@
 <?php
 namespace Zitarrosa\ODM;
 
-use Exception;
-
 /**
  * Facade of all ODM subsystems
  *
@@ -161,14 +159,5 @@ final class EntityManager implements EntityManagerInterface
     public function getUnitOfWork()
     {
         return $this->unitOfWork;
-    }
-
-    public static function create($connector, Configuration $config)
-    {
-        if (!$config->getMetadataDriverImpl()) {
-            throw new Exception('Metadata driver not defined');
-        }
-
-        return new EntityManager($config);
     }
 }

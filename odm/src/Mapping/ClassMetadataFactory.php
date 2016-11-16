@@ -19,17 +19,14 @@ class ClassMetadataFactory extends AbstractClassMetadataFactory
     protected $em;
 
     /**
-     * @var \Doctrine\Common\Persistence\Mapping\Driver\MappingDriver
-     */
-    private $driver;
-
-    /**
-     * {@inheritdoc}
+     * Lazy initialization of this stuff, especially the metadata driver,
+     * since these are not needed at all when a metadata cache is active.
+     *
+     * @return void
      */
     protected function initialize()
     {
-        $this->driver = $this->em->getConfiguration()->getMetadataDriverImpl();
-        $this->initialized = true;
+
     }
 
     /**
@@ -62,7 +59,7 @@ class ClassMetadataFactory extends AbstractClassMetadataFactory
      */
     protected function getDriver()
     {
-        return $this->driver;
+
     }
 
     /**

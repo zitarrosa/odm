@@ -1,5 +1,8 @@
 ## ElasticSearch ODM
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/zitarrosa/odm/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/zitarrosa/odm/?branch=master)
+[![Build Status](https://travis-ci.org/zitarrosa/odm.svg?branch=master)](https://travis-ci.org/zitarrosa/odm)
+
 ```
 curl -XPUT 'http://localhost:9900/testing/' -d '{
     "settings" : {

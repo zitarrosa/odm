@@ -7,7 +7,7 @@ use ReflectionClass;
 /**
  * ODM Test
  */
-class ODMTest extends PHPUnit_Framework_TestCase
+abstract class ODMTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Creates a new class instance without invoking constructor
